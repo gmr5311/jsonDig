@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func findInJSON(original, searchKey string, expectedValue interface{}) bool {
+func FindInJSON(original, searchKey string, expectedValue interface{}) bool {
 	found := false
 	var converted map[string]interface{}
 	json.Unmarshal([]byte(original), &converted)
@@ -34,7 +34,7 @@ func findInJSON(original, searchKey string, expectedValue interface{}) bool {
 			if err != nil {
 				fmt.Printf("The map failed to marshal: %s\n", err)
 			}
-			found = findInJSON(string(tempString), searchKey, expectedValue)
+			found = FindInJSON(string(tempString), searchKey, expectedValue)
 		}
 	}
 	return found
