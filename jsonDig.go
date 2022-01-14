@@ -1,4 +1,4 @@
-package main
+package jsondig
 
 import (
 	"encoding/json"
@@ -7,12 +7,6 @@ import (
 	"strconv"
 )
 
-const silly = `{"id":"1","name":"bob","deep":{"nestedID":7,"nestedName":"joe", "deeper":{"super":7,"something":"cool string"}}}`
-
-func main() {
-	fmt.Printf("result of find: %t\n", findInJSON(silly, "super", 7))
-}
-
 func findInJSON(original, searchKey string, expectedValue interface{}) bool {
 	found := false
 	var converted map[string]interface{}
@@ -20,6 +14,7 @@ func findInJSON(original, searchKey string, expectedValue interface{}) bool {
 
 	for key, value := range converted {
 		if key == searchKey && !found {
+			fmt.Printf("Found key \"%s\"\n", key)
 			if reflect.TypeOf(value).Kind() == reflect.Float64 && reflect.TypeOf(expectedValue).Kind() == reflect.Int {
 				var err error
 				temp := fmt.Sprintf("%d", expectedValue)
@@ -28,6 +23,8 @@ func findInJSON(original, searchKey string, expectedValue interface{}) bool {
 					fmt.Printf("Failed to convert float: %s\n", err)
 				}
 			}
+			fmt.Printf("Type of value: %T\n", value)
+			fmt.Printf("Type of expected value: %T\n", expectedValue)
 			if value == expectedValue {
 				found = true
 				break
