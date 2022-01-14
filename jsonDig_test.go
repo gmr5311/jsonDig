@@ -26,7 +26,10 @@ func TestJsonDig(t *testing.T) {
 		},
 	}
 	thing, err := json.Marshal(test)
+	assert.Equal(t, nil, err)
 
-	assert.Equal(t, true, FindInJSON(string(thing), "name", "Bob"))
+	found, err := FindInJSON(string(thing), "name", "Bob")
+
+	assert.Equal(t, true, found)
 	assert.Equal(t, nil, err)
 }
