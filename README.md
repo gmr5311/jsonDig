@@ -1,5 +1,7 @@
 # jsonDig
 
+![test workflow](https://github.com/gmr5311/jsondig/actions/workflows/test/badge.svg)
+
 A Go package for searching through a given json string for a specific key and expecting it's value to be what you expected.
 
 ### Importing
